@@ -47,12 +47,12 @@ const BaseLayout = () => {
   useEffect(() => {
     if (!token || token === '') {
       setPathToAfterLogin(location.pathname);
-      messageApi.open({
-        type: 'error',
-        content: '로그인후 이용해주세요',
-        duration: 1,
-        onClose: () => navigate('/'),
-      });
+      // messageApi.open({
+      //   type: 'error',
+      //   content: '로그인후 이용해주세요',
+      //   duration: 1,
+      //   onClose: () => navigate('/'),
+      // });
     }
   }, [navigate, location, token, messageApi, setPathToAfterLogin]);
 

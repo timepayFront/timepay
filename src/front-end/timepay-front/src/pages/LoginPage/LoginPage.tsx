@@ -25,7 +25,7 @@ const LoginPage = () => {
       <Button
         type="link"
         css={cssLinkAgencyBtnStyle}
-        onClick={() => navigate(PATH.AGENCY_SIGN_IN)}
+        onClick={() => navigate(PATH.HOME)}
       >
         기관 회원 로그인하기
         <DoubleRightOutlined />

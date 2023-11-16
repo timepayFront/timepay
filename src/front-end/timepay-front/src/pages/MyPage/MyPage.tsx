@@ -329,6 +329,14 @@ const MyPage = () => {
                 활동 기록
               </button>
             </div> */}
+            {<div className="MyPageMoveBox">
+              <button
+                className="MyPageText"
+                onClick={() => handlePageMove(PATH.SHARE)}
+              >
+                사이트 공유하기
+              </button>
+            </div>}
             {!agencyInfo && (
               <div className="MyPageMoveBox">
                 <button

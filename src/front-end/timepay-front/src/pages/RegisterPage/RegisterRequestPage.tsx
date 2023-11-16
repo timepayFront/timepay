@@ -10,6 +10,8 @@ import {
   DatePicker,
   Checkbox,
   Modal,
+  Row,
+  Col
 } from 'antd';
 import { RcFile, UploadChangeParam, UploadProps } from 'antd/es/upload';
 import { useCallback, useState, useMemo, useEffect } from 'react';
@@ -43,6 +45,9 @@ import {
   cssPostAutoStyle,
   cssPostInputNumberStyle,
 } from './RegisterRequest.styles';
+import moment from 'moment';
+import { Rule } from 'antd/lib/form';
+
 
 const { TextArea } = Input;
 const MAX_IMAGES = 5;
@@ -243,12 +248,12 @@ const RegisterRequestPage = () => {
               : 0
             : 0,
           images: null,
-          startTime: `${values.activityDate.format(
+          startTime: `${moment(values.activityDate).format(
             'YYYY-MM-DD',
-          )}T${values.startTime.format('HH:mm:ss')}.000Z`,
-          endTime: `${values.activityDate.format(
+          )}T${moment(values.startTime).format('HH:mm:ss')}.000Z`,
+          endTime: `${moment(values.activityDate).format(
             'YYYY-MM-DD',
-          )}T${values.endTime.format('HH:mm:ss')}.000Z`,
+          )}T${moment(values.endTime).format('HH:mm:ss')}.000Z`,
           pay: exchangeTimepay,
         };
 
@@ -308,6 +313,19 @@ const RegisterRequestPage = () => {
   const handleTimeLocationChange = () => {
     setCurrent(2); // startTime과 endTime 값을 가져옵니다.
   };
+
+  // const [startTime, setStartTime] = useState(new Date());  // 각각 입력된 값을 DatePicker 형식으로 바꾸기 위함
+  // const [endTime, setEndTime] = useState(new Date());
+
+  // const validateEndTime = (rule: Rule) => {
+  //   const startTime = form.getFieldValue('startTime');
+  //   const endTime = form.getFieldValue('endTime');
+  //   if (endTime && startTime && endTime.isBefore(startTime)) {
+  //     return Promise.reject('종료 시간은 시작 시간보다 빨라야 합니다.');
+  //   }
+  //   return Promise.resolve();
+  // };
+
 
   return (
     <div css={cssPostPageStyle}>
@@ -429,52 +447,143 @@ const RegisterRequestPage = () => {
             label="활동을 시작할 시간"
             css={cssPostDateStyle}
             initialValue={dayjs().minute(0)}
-          >
-            <DatePicker.TimePicker
-              locale={locale}
-              format="HH시 mm분"
-              placeholder="시간"
-              showNow={false}
-              minuteStep={30}
-              popupClassName="time-picker-no-footer"
-              onSelect={(value) => {
-                form.setFieldValue('startTime', value);
-                handleOnChangeTime({ startTime: value }, form.getFieldsValue());
-              }}
-            />
+            >
+            <Row justify="start" align="top">
+              <Col>
+                <Input type="number"
+                  placeholder="시간"
+                  min={0}
+                  max={23}
+                  onChange={(e) => {
+                    const hours = e.target.value;      
+                    form.setFieldValue("startTimeHour", parseInt(hours, 10));
+                  }}
+                  style={{width: "100px"}}
+                />
+              </Col>
+              <Col>
+                <Input type="number"
+                  placeholder="분"
+                  min={0}
+                  max={59}
+                  onChange={(e) => {
+                    const minutes = e.target.value;
+                    form.setFieldValue("startTimeMinute", parseInt(minutes, 10));
+                  }}
+                  style={{width: "100px"}}
+                />
+              </Col>
+              {/* <DatePicker.TimePicker
+                locale={locale}
+                format="HH시"
+                placeholder="시간"
+                showNow={false}
+                minuteStep={60} // 시간 단위로 설정
+                popupClassName="time-picker-no-footer"
+                onSelect={(value) => {
+                  const selectedHour = value.hour();
+                  form.setFieldValue('startTimeHour', selectedHour);
+                }}
+              />
+              <DatePicker.TimePicker
+                locale={locale}
+                format="mm분"
+                placeholder="분"
+                showNow={false}
+                minuteStep={30}
+                popupClassName="time-picker-no-footer"
+                onSelect={(value) => {
+                  const selectedMinute = value.minute();
+                  form.setFieldValue('startTimeMinute', selectedMinute);
+                }}
+              /> */}
+            </Row>
           </Form.Item>
+
           <Form.Item
             name="endTime"
             label="활동이 끝날 시간"
             css={cssPostDateStyle}
             initialValue={dayjs().minute(0)}
-          >
-            <DatePicker.TimePicker
-              locale={locale}
-              format="HH시 mm분"
-              placeholder="시간"
-              showNow={false}
-              minuteStep={30}
-              allowClear={false}
-              popupClassName="time-picker-no-footer"
-              onSelect={(value) => {
-                form.setFieldValue('endTime', value);
-                handleOnChangeTime({ endTime: value }, form.getFieldsValue());
-              }}
-              disabledTime={(now) => {
-                return {
-                  disabledHours: () => {
-                    const { startTime } = form.getFieldsValue(['startTime']);
-                    if (startTime) {
-                      const selectedHour = startTime.hour();
-                      return Array.from({ length: selectedHour }, (_, i) => i);
-                    }
-                    return [];
-                  },
-                };
-              }}
-            />
+            // validateStatus={form.getFieldError('endTime') ? 'error' : ''}
+            // help={form.getFieldError('endTime')}
+            // rules={[
+            //   { validator: validateEndTime }
+            // ]}
+            >
+            <Row justify="start" align="top">
+              <Col>
+                <Input type="number"
+                  placeholder="시간"
+                  min={0}
+                  max={23}
+                  onChange={(e) => {
+                    const hours = e.target.value;      
+                    form.setFieldValue("endTimeHour", parseInt(hours, 10));
+                    // var fieldValue = form.getFieldValue("startTimeHour");
+                    // console.log(fieldValue);
+                  }}
+                  style={{width: "100px"}}
+                />
+              </Col>
+              <Col>
+                <Input type="number"
+                  placeholder="분"
+                  min={0}
+                  max={59}
+                  onChange={(e) => {
+                    const minutes = e.target.value;
+                    form.setFieldValue("endTimeMinute", parseInt(minutes, 10));
+                    
+                    // var startTimeHourValue = form.getFieldValue("startTimeHour");
+                    // var startTimeMinuteValue = form.getFieldValue("startTimeMinute");
+
+                    // var endTimeHourValue = form.getFieldValue("endTimeHour");
+                    // var endTimeMinuteValue = form.getFieldValue("endTimeMinute");
+
+                    // // 새로운 Date 객체를 생성하여 시간 설정
+                    // const fullStartTime = new Date(startTime);
+                    // const fullEndTime = new Date(endTime);
+
+                    // fullStartTime.setHours(startTimeHourValue);
+                    // fullStartTime.setMinutes(startTimeMinuteValue);
+                    // fullStartTime.setSeconds(0);
+                    // setStartTime(fullStartTime);
+
+                    // fullEndTime.setHours(endTimeHourValue);
+                    // fullEndTime.setMinutes(endTimeMinuteValue);
+                    // fullEndTime.setSeconds(0);
+                    // setStartTime(fullEndTime);
+                      }}
+                  style={{width: "100px"}}
+            /* <DatePicker.TimePicker
+                locale={locale}
+                format="HH시"
+                placeholder="시간"
+                showNow={false}
+                minuteStep={60} // 시간 단위로 설정
+                popupClassName="time-picker-no-footer"
+                onSelect={(value) => {
+                  const selectedHour = value.hour();
+                  form.setFieldValue('startTimeHour', selectedHour);
+                }}
+              />
+              // <DatePicker.TimePicker
+              //   locale={locale}
+              //   format="mm분"
+              //   placeholder="분"
+              //   showNow={false}
+              //   minuteStep={30}
+              //   popupClassName="time-picker-no-footer"
+              //   onSelect={(value) => {
+              //     const selectedMinute = value.minute();
+              //     form.setFieldValue('endTimeMinute', selectedMinute);
+              //   }} */
+                    />
+                </Col>
+            </Row>
           </Form.Item>
+
         </div>
         <div className="guide">
           <div>

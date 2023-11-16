@@ -3,9 +3,7 @@ import {
   cssHomeBtnStyle,
   cssMainFooterStyle,
   cssPlusPostBtnStyle,
-  cssBtnStyle,
-  cssBtnStyle1,
-} from './MainFooter.styles';
+} from './WriteButton.style';
 import { MenuProps, Modal } from 'antd';
 import { Button, Dropdown, Layout } from 'antd';
 import { BellOutlined, UserOutlined } from '@ant-design/icons';
@@ -65,43 +63,36 @@ const MainFooter = () => {
     });
   }, [data]);
 
-  const items: MenuProps['items'] = useMemo(() => {
-    const items = [
-      {
-        key: PATH.Register_HR,
-        label: <Link to={PATH.Register_HR}>도움요청</Link>,
-      },
-      {
-        key: PATH.Register_HS,
-        label: <Link to={PATH.Register_HS}>같이하기</Link>,
-      },
-    ];
-    if (isAgency)
-      items.push({
-        key: PATH.DONATION_BOARD_WRITE,
-        label: <Link to={PATH.DONATION_BOARD_WRITE}>기부하기</Link>,
-      });
-    else
-      items.push({
-        key: '바로도움요청',
-        label: (
-          <Button type="link" onClick={handleOnShowQRModal}>
-            바로도움요청
-          </Button>
-        ),
-      });
-    return items;
-  }, [isAgency, handleOnShowQRModal]);
+  // const items: MenuProps['items'] = useMemo(() => {
+  //   const items = [
+  //     {
+  //       key: PATH.Register_HR,
+  //       label: <Link to={PATH.Register_HR}>도움요청</Link>,
+  //     },
+  //     {
+  //       key: PATH.Register_HS,
+  //       label: <Link to={PATH.Register_HS}>같이하기</Link>,
+  //     },
+  //   ];
+  //   if (isAgency)
+  //     items.push({
+  //       key: PATH.DONATION_BOARD_WRITE,
+  //       label: <Link to={PATH.DONATION_BOARD_WRITE}>기부하기</Link>,
+  //     });
+  //   else
+  //     items.push({
+  //       key: '바로도움요청',
+  //       label: (
+  //         <Button type="link" onClick={handleOnShowQRModal}>
+  //           바로도움요청
+  //         </Button>
+  //       ),
+  //     });
+  //   return items;
+  // }, [isAgency, handleOnShowQRModal]);
 
   return (
     <>
-      <div css={cssBtnStyle}>
-        <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청</Link></Button>
-        <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기</Link></Button>
-        <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청</Link></Button>
-      </div>
-      
-
       {/* <div className="float" css={cssFloating}>
         {isViewWriteBtn && (
           <Dropdown
@@ -120,14 +111,13 @@ const MainFooter = () => {
         )}
       </div> */}
       <Layout.Footer css={cssMainFooterStyle}>
-        {/* <Button onClick={handleOnClickModifyFontSize}>
+        <Button onClick={handleOnClickModifyFontSize}>
           <ModifyFontSizeSmall style={{ display: isBig ? 'none' : 'block' }} />
           <ModifyFontSizeBig style={{ display: isBig ? 'block' : 'none' }} />
-        </Button> */}
+        </Button>
 
         <Button className="cssHomeHeaderNotificationStyle">
           <BellOutlined onClick={handleOnLinkNotification} />
-          알림
         </Button>
         <NavLink
           to={PATH.HOME}
@@ -135,7 +125,6 @@ const MainFooter = () => {
         >
           <Button css={cssHomeBtnStyle}>
             <Home width={30} height={30} />
-            홈으로
           </Button>
         </NavLink>
 
@@ -145,7 +134,6 @@ const MainFooter = () => {
         >
           <Button>
             <ActivityRecord width={30} height={30} />
-              활동내역
           </Button>
         </NavLink>
 
@@ -155,7 +143,6 @@ const MainFooter = () => {
         >
           <Button>
             <UserOutlined />
-              내 정보
           </Button>
         </NavLink>
       </Layout.Footer>
