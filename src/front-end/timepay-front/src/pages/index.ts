@@ -4,6 +4,7 @@ import JoinPage from './JoinPage';
 import FinishJoinPage from './FinishJoinPage';
 import HomePage from './HomePage';
 import MyPage from './MyPage';
+import WritePage from './WritePage';
 import MyEditPage from './MyEditPage';
 import SearchPage from './SearchPage';
 import RegisterFreePage from './RegisterPage/RegisterFreePage';
@@ -36,6 +37,7 @@ const PageRoutes = {
   FinishJoinPage,
   HomePage,
   MyPage,
+  WritePage,
   MyEditPage,
   SearchPage,
   RegisterFreePage,
