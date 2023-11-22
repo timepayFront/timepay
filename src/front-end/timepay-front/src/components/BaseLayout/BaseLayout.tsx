@@ -50,7 +50,7 @@ const BaseLayout = () => {
       // messageApi.open({
       //   type: 'error',
       //   content: '로그인후 이용해주세요',
-      //   duration: 1,
+      //   duration: 100000,
       //   onClose: () => navigate('/'),
       // });
     }

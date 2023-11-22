@@ -2,14 +2,16 @@ import {
   cssBox,
   cssCategoryListStyle,
   cssHomePageStyle,
+  cssSearch,
 } from './HomePage.styles';
 import { ReactComponent as Logo } from '../../assets/images/icons/timepay-character-logo.svg';
-import { Button, Input, Modal, Spin } from 'antd';
+import { Button, Dropdown, Input, Modal, Spin } from 'antd';
 import { useGetCategory } from '../../api/hooks/category';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { PATH } from '../../utils/paths';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { AlignRightOutlined, BellOutlined, UserOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
 import {
   boardSearchState,
   initialBoardSearchState,
@@ -20,6 +22,7 @@ import {
   setMultiTokenToCookie,
 } from '../../utils/token';
 import { COMMON_COLOR } from '../../styles/constants/colors';
+
 const HomePage = () => {
   const navigate = useNavigate();
 
@@ -39,6 +42,10 @@ const HomePage = () => {
   const handleOnChange = useCallback((e: any) => {
     setSearchTitleValue(e.target.value);
   }, []);
+
+  const handleOnLinkNotification = useCallback(() => {
+    navigate(PATH.NOTIFICATION);
+  }, [navigate]);
 
   const handleOnSearchTitle = useCallback(() => {
     setBoardSearchState({
@@ -102,8 +109,11 @@ const HomePage = () => {
           </Button>
         </div>
       )}
-
-      <div className="title-search-container">
+      <div className="title-search-container" >
+      <Button className="cssHomeHeaderNotificationStyle" css={cssSearch}>
+            <BellOutlined onClick={handleOnLinkNotification} />
+          {/* 알림 */}
+        </Button>
         <Logo />
         <div className="title-search">
           <Input
@@ -142,7 +152,6 @@ const HomePage = () => {
       </div>
     </div>
   );
-  
 };
 
 export default HomePage;

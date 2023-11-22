@@ -1,5 +1,5 @@
 import { BellOutlined, MenuOutlined } from '@ant-design/icons';
-import { Badge, Dropdown, MenuProps } from 'antd';
+import { Badge, Dropdown, MenuProps, Button, Layout} from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -24,7 +24,7 @@ const HomeHeader = () => {
       return qs.type;
     else return '전체';
   }, [location]);
-
+  
   const items: MenuProps['items'] = useMemo(() => {
     return [
       {
@@ -113,6 +113,7 @@ const HomeHeader = () => {
         arrow
         trigger={['click']}
       >
+        
         <div>
           <MenuOutlined />
           {currentPostType}
