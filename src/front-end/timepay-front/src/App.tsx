@@ -36,6 +36,10 @@ function App() {
             <Route path={PATH.SEARCH} element={<PageRoutes.SearchPage />} />
             <Route path={PATH.MY_PAGE} element={<PageRoutes.MyPage />} />
             <Route
+              path={PATH.WritePage}
+              element={<PageRoutes.WritePage />}
+            />
+            <Route
               path={PATH.Register_HR}
               element={<PageRoutes.RegisterRequestPage />}
             />

@@ -6,6 +6,7 @@ export const PATH = {
   HOME: '/home',
   SEARCH: '/search',
   MY_PAGE: '/my',
+  WritePage: '/write-page',  // WritePage 경로
   Register_HR: '/register/help-request',
   Register_HS: '/register/help-serve',
   Register_F: '/register/free',
