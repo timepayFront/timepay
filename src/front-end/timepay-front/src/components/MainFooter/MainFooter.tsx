@@ -22,6 +22,7 @@ import { fontSizeState } from '../../states/uiState';
 import useFontSize from '../../hooks/useFontSize';
 import { useGetUserInfo } from '../../api/hooks/user';
 import InstantActivityQRModal from '../InstantActivityQRModal';
+import { handleOnLinkWrite } from '../../pages/WritePage/WritePage';
 
 const MainFooter = () => {
   const { data } = useGetUserInfo();
@@ -96,9 +97,9 @@ const MainFooter = () => {
   return (
     <>
       <div css={cssBtnStyle}>
-        <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청</Link></Button>
+        {/* <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청</Link></Button>
         <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기</Link></Button>
-        <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청</Link></Button>
+        <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청</Link></Button> */}
       </div>
       
 
@@ -125,10 +126,19 @@ const MainFooter = () => {
           <ModifyFontSizeBig style={{ display: isBig ? 'block' : 'none' }} />
         </Button> */}
 
-        <Button className="cssHomeHeaderNotificationStyle">
+        {/* <Button className="cssHomeHeaderNotificationStyle">
           <BellOutlined onClick={handleOnLinkNotification} />
           알림
-        </Button>
+        </Button> */}
+        <NavLink
+          to={PATH.WritePage}
+          className={({ isActive }) => (isActive ? 'active' : undefined)}
+        >
+          <Button>
+            글쓰기
+          </Button>
+        </NavLink>
+
         <NavLink
           to={PATH.HOME}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
