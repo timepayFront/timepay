@@ -160,7 +160,7 @@ const MainFooter = () => {
           </Button>
         </NavLink> */}
 
-        <NavLink
+        {/* <NavLink
           to={PATH.MY_ACTIVITY_RECORD}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
         >
@@ -168,7 +168,7 @@ const MainFooter = () => {
             <ActivityRecord width={30} height={30} />
               활동내역
           </Button>
-        </NavLink>
+        </NavLink> */}
 
         <NavLink
           to={PATH.MY}
