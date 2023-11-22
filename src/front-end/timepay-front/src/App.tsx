@@ -85,6 +85,7 @@ function App() {
               path={`${PATH.PAYMENT_CERTIFICATION}/:boardId`}
               element={<PageRoutes.VolunteerCertificationPaymentPage />}
             />
+            <Route path={PATH.SEARCH_HOME} element = {<PageRoutes.SearchHomePage/>} />
             <Route
               path={PATH.CATEGORY_SELECT}
               element={<CategorySelectPage />}

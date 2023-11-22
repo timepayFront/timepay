@@ -6,7 +6,7 @@ import {
 } from './MainFooter.styles';
 import { MenuProps, Modal } from 'antd';
 import { Button, Dropdown, Layout } from 'antd';
-import { BellOutlined, UserOutlined } from '@ant-design/icons';
+import { BellOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { ReactComponent as ModifyFontSizeBig } from '../../assets/images/icons/modify-font-size-big.svg';
 import { ReactComponent as ModifyFontSizeSmall } from '../../assets/images/icons/modify-font-size-small.svg';
 import { ReactComponent as WriteBoard } from '../../assets/images/icons/write-board.svg';

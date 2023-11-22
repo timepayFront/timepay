@@ -33,7 +33,8 @@ export const PATH = {
   DONATION_BOARD: '/donation',
   AGENT: '/agent',
   APPLICANT: '/applicant',
-  SHARE: '/share'
+  SHARE: '/share',
+  SEARCH_HOME: '/search-home'
 };
 
 export const deployHostName = 'http://13.125.249.51';
