@@ -8,7 +8,7 @@ import {
 } from './MainFooter.styles';
 import { MenuProps, Modal } from 'antd';
 import { Button, Dropdown, Layout } from 'antd';
-import { BellOutlined, UserOutlined } from '@ant-design/icons';
+import { BellOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { ReactComponent as ModifyFontSizeBig } from '../../assets/images/icons/modify-font-size-big.svg';
 import { ReactComponent as ModifyFontSizeSmall } from '../../assets/images/icons/modify-font-size-small.svg';
 import { ReactComponent as WriteBoard } from '../../assets/images/icons/write-board.svg';
@@ -129,6 +129,17 @@ const MainFooter = () => {
           <BellOutlined onClick={handleOnLinkNotification} />
           알림
         </Button>
+        
+        <NavLink
+          to={PATH.SEARCH_HOME}
+          className={({ isActive }) => (isActive ? 'active' : undefined)}
+        >
+          <Button>
+            <SearchOutlined />
+              검색
+          </Button>
+        </NavLink>
+
         <NavLink
           to={PATH.HOME}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
