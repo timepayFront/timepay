@@ -81,6 +81,7 @@ function App() {
               element={<PageRoutes.MyVolunteerPage />}
             />
             <Route path={PATH.SHARE} element = {<PageRoutes.SharePage/>} />
+            <Route path={PATH.SEARCH_HOME} element = {<PageRoutes.SearchHomePage/>} />
             <Route
               path={`${PATH.PAYMENT_CERTIFICATION}/:boardId`}
               element={<PageRoutes.VolunteerCertificationPaymentPage />}
