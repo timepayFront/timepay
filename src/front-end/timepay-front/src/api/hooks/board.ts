@@ -85,7 +85,7 @@ export const useCreateReports = () => {
   return useMutation<AxiosResponse<boolean>, AxiosError, IReportBoard>({
     mutationKey: 'useReports',
     mutationFn: (data) =>
-      apiRequest.post(API_URL.FREE_BOARDS_WRITE, {
+      apiRequest.post(API_URL.DEAL_REPORT, {
         ...data,
       }),
   });
