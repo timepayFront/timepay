@@ -3,8 +3,6 @@ import {
   cssHomeBtnStyle,
   cssMainFooterStyle,
   cssPlusPostBtnStyle,
-  cssBtnStyle,
-  cssBtnStyle1,
 } from './MainFooter.styles';
 import { MenuProps, Modal } from 'antd';
 import { Button, Dropdown, Layout } from 'antd';
@@ -22,7 +20,6 @@ import { fontSizeState } from '../../states/uiState';
 import useFontSize from '../../hooks/useFontSize';
 import { useGetUserInfo } from '../../api/hooks/user';
 import InstantActivityQRModal from '../InstantActivityQRModal';
-import { handleOnLinkWrite } from '../../pages/WritePage/WritePage';
 
 const MainFooter = () => {
   const { data } = useGetUserInfo();
@@ -96,14 +93,7 @@ const MainFooter = () => {
 
   return (
     <>
-      <div css={cssBtnStyle}>
-        {/* <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청</Link></Button> */}
-        {/* <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기</Link></Button> */}
-        {/* <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청</Link></Button> */}
-      </div>
-      
-
-      {/* <div className="float" css={cssFloating}>
+      <div className="float" css={cssFloating}>
         {isViewWriteBtn && (
           <Dropdown
             menu={{ items }}
@@ -119,36 +109,16 @@ const MainFooter = () => {
             </Button>
           </Dropdown>
         )}
-      </div> */}
+      </div>
       <Layout.Footer css={cssMainFooterStyle}>
         {/* <Button onClick={handleOnClickModifyFontSize}>
           <ModifyFontSizeSmall style={{ display: isBig ? 'none' : 'block' }} />
           <ModifyFontSizeBig style={{ display: isBig ? 'block' : 'none' }} />
         </Button> */}
 
-        {/* <Button className="cssHomeHeaderNotificationStyle">
+        {/* { <Button className="cssHomeHeaderNotificationStyle">
           <BellOutlined onClick={handleOnLinkNotification} />
-          알림
-        </Button> */}
-
-        <NavLink
-          to={PATH.WritePage}
-          className={({ isActive }) => (isActive ? 'active' : undefined)}
-        >
-          <Button>
-            글쓰기
-          </Button>
-        </NavLink>
-
-        <NavLink
-          to={PATH.HOME}
-          className={({ isActive }) => (isActive ? 'active' : undefined)}
-        >
-          <Button css={cssHomeBtnStyle}>
-            <Home width={30} height={30} />
-            홈으로
-          </Button>
-        </NavLink>
+        </Button> } */}
 
         <NavLink
           to={PATH.MY_ACTIVITY_RECORD}
@@ -156,9 +126,21 @@ const MainFooter = () => {
         >
           <Button>
             <ActivityRecord width={30} height={30} />
-              활동내역
+              {/* 활동내역 */}
           </Button>
         </NavLink>
+
+        <NavLink  
+          to={PATH.HOME}
+          className={({ isActive }) => (isActive ? 'active' : undefined)}
+        >
+          <Button css={cssHomeBtnStyle}>
+            <Home width={30} height={30} />
+            {/* 홈 */}
+          </Button>
+        </NavLink>
+
+        
 
         <NavLink
           to={PATH.MY}
@@ -166,7 +148,7 @@ const MainFooter = () => {
         >
           <Button>
             <UserOutlined />
-              내 정보
+              {/* 내 정보 */}
           </Button>
         </NavLink>
       </Layout.Footer>

@@ -84,19 +84,3 @@ export const cssHomeBtnStyle = css`
   justify-content: center;
   align-items: center;
 `;
-export const cssBtnStyle = css`
-  position: fixed;
-  bottom : 56px;
-  width: 100%;
-  height: 100px;
-  display : flex;
-  flex-direction: row;
-  justify-content : center;
-  align-items:center;
-`
-export const cssBtnStyle1 = css`
-  flex: 1;
-  font-size:20px;
-  height : 50px;
-  box-sizing: border-box;
-`
