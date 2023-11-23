@@ -16,7 +16,7 @@ export const cssSearch = css`
   border-radius: 54px !important;
   border: none;
   float: right;
-  right: -140px;
+  right: -40%;
   display: flex;
   justify-content: center;
   align-items: center;
