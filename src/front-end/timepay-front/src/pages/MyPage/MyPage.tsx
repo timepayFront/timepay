@@ -345,14 +345,14 @@ const MyPage = () => {
                 활동 내역
               </button>
             </div>}
-            {<div className="MyPageMoveBox">
+            {/*<div className="MyPageMoveBox">
               <button
                 className="MyPageText"
                 onClick={() => handlePageMove(PATH.NOTIFICATION)}
               >
                 알림
               </button>
-            </div>}
+            </div>*/}
             {!agencyInfo && (
               <div className="MyPageMoveBox">
                 <button
