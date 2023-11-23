@@ -118,8 +118,8 @@ const MainFooter = () => {
 
         {/* { <Button className="cssHomeHeaderNotificationStyle">
           <BellOutlined onClick={handleOnLinkNotification} />
-        </Button> } */}
-
+          알림
+      </Button> */}
         <NavLink
           to={PATH.MY_ACTIVITY_RECORD}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
