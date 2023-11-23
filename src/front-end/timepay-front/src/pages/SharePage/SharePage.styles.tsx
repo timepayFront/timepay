@@ -8,6 +8,10 @@ export const cssSharePageStyle = (scaleValue: number) => css`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    font-size: medium;
+    font-style: normal;
+    font-weight: 700;
+    font-size: calc(18px * ${scaleValue});
+    line-height: calc(15px * ${scaleValue});
+    color: ${COMMON_COLOR.FONT3};
   }
 `;
