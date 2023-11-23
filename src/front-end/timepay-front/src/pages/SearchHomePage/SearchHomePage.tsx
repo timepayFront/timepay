@@ -7,7 +7,7 @@ import {
   import { Button, Input, Modal, Spin } from 'antd';
   import { useGetCategory } from '../../api/hooks/category';
   import { useNavigate } from 'react-router-dom';
-  import { useCallback, useState } from 'react';
+  import { useCallback, useState, useEffect } from 'react';
   import { PATH } from '../../utils/paths';
   import { useRecoilValue, useSetRecoilState } from 'recoil';
   import {
@@ -20,7 +20,11 @@ import {
     setMultiTokenToCookie,
   } from '../../utils/token';
   import { COMMON_COLOR } from '../../styles/constants/colors';
+  import { headerTitleState } from '../../states/uiState';
+
   const SearchHomePage = () => {
+
+    const setHeaderTitle = useSetRecoilState(headerTitleState);
     const navigate = useNavigate();
   
     const boardSearchValue = useRecoilValue(boardSearchState);
@@ -86,6 +90,11 @@ import {
         cancelText: '취소',
       });
     }, [confirm, logoutToken]);
+
+    useEffect(() => {
+      setHeaderTitle('검색');
+    }, [setHeaderTitle]);
+
     return (
       <div css={cssHomePageStyle(scaleValue)}>
         {!token || token === 'undefined' ? (
@@ -141,7 +150,8 @@ import {
           받은 타임페이로 필요한 곳에 도움을 요청해보세요!
         </div>
       </div>
-    );
+    );    
+    
   
   };
   
