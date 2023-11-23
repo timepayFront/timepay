@@ -129,7 +129,7 @@ const MainFooter = () => {
         {/* <Button className="cssHomeHeaderNotificationStyle">
           <BellOutlined onClick={handleOnLinkNotification} />
           알림
-        </Button>
+      </Button> */}
         
         <NavLink
           to={PATH.SEARCH_HOME}
