@@ -30,6 +30,7 @@ import ApplicantPage from './ApplicantPage';
 import DonationBoardEditPage from './DonationBoardEditPage';
 import SharePage from './SharePage';
 import SearchHomePage from './SearchHomePage'; 
+import BankingPage from './BankingPage';
 
 const PageRoutes = {
   LoginPage,
@@ -64,6 +65,7 @@ const PageRoutes = {
   ApplicantPage,
   SharePage,
   SearchHomePage,
+  BankingPage,
 };
 
 export default PageRoutes;
