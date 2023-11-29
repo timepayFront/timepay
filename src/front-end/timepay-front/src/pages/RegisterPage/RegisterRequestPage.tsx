@@ -92,6 +92,7 @@ const RegisterRequestPage = () => {
   const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [isVolunteer, setIsVolunteer] = useState(false);
+  const [section, setSection] = useState(0);
 
   const isAgency = useMemo(() => {
     if (userInfo?.data.body.manager_name) return true;
@@ -328,8 +329,364 @@ const RegisterRequestPage = () => {
 
 
   return (
-    <div css={cssPostPageStyle}>
-      {contextHolder}
+    <div>
+        // 섹션 1
+      {
+        section === 0 && (
+          <>
+            {
+              <Form onFinish={handleOnSubmit} form={form} layout="vertical">
+              <div css={cssPostPageStyle}>
+              {isAgency && (
+            <Form.Item
+              label=""
+              name="volunteer"
+              css={cssPostCategoryStyle}
+              valuePropName="checked"
+              extra="봉사활동 지급 게시글 등록은 봉사활동 자격 서류 인증을 완료한 기관만 가능합니다."
+            >
+              <Checkbox
+                disabled={!isVolunteerAvailable}
+                onChange={(e) => {
+                  setIsVolunteer(e.target.checked);
+                }}
+              >
+                봉사활동 지급 여부
+              </Checkbox>
+            </Form.Item>
+          )}
+          {isAgency && (
+            <Form.Item
+              label="봉사활동 인원"
+              name="volunteerPeople"
+              css={cssPostInputNumberStyle}
+              extra="인원 * 타임페이가 소모될 예정입니다."
+            >
+              <Input
+                min={1}
+                disabled={!isVolunteerAvailable || !isVolunteer}
+                addonAfter="명"
+              />
+            </Form.Item>
+          )}
+          {isAgency && (
+            <Form.Item
+              label="지급할 봉사활동 시간"
+              name="volunteerTime"
+              css={cssPostInputNumberStyle}
+              extra={
+                <>
+                  활동 완료 시 봉사자에게 지급할 봉사시간입니다. <br /> 작성하지
+                  않을 경우 활동 시간에서 반올림합니다.
+                </>
+              }
+              rules={[{ required: false }]}
+            >
+              <Input
+                min={1}
+                step={1}
+                disabled={!isVolunteerAvailable || !isVolunteer}
+                addonAfter="시간"
+              />
+            </Form.Item>
+          )}
+          <Form.Item
+            label="카테고리 선택"
+            name="category"
+            css={isAgency ? cssPostDateStyle : cssPostCategoryStyle}
+          >
+            <Radio.Group onChange={handleCategoryChange}>
+              {data?.data.map((category) => (
+                <Radio.Button
+                  key={category.categoryId}
+                  value={category.categoryName}
+                  style={{
+                    borderRadius: '0',
+                    margin: '5px',
+                    fontWeight: '500',
+                  }}
+                >
+                  {category.categoryName}
+                </Radio.Button>
+              ))}
+            </Radio.Group>
+          </Form.Item>
+              </div>
+              </Form>}
+            <Button onClick={() => setSection(1)}>다음 섹션으로</Button>
+          </>
+        )
+      }
+
+  // 섹션 2
+      {
+        section === 1 && (
+          <>
+            {
+            <Form onFinish={handleOnSubmit} form={form} layout="vertical">
+              <div css={cssPostPageStyle}>
+              <Form.Item
+            name="activityDate"
+            label="활동일"
+            initialValue={dayjs()}
+            css={cssPostDateStyle}
+          >
+            <DatePicker format="YYYY년 MM월 DD일" />
+          </Form.Item>
+
+          <div className="time">
+            <Form.Item
+              name="startTime"
+              label="활동을 시작할 시간"
+              css={cssPostDateStyle}
+              initialValue={dayjs().minute(0)}
+            >
+              <Row justify="start" align="top">
+                <Col>
+                  <Input type="number"
+                    placeholder="시간"
+                    min={0}
+                    max={23}
+                    onChange={(e) => {
+                      const hours = e.target.value;
+                      form.setFieldValue("startTimeHour", parseInt(hours, 10));
+                    }}
+                    style={{ width: "100px" }}
+                  />
+                </Col>
+                <Col>
+                  <Input type="number"
+                    placeholder="분"
+                    min={0}
+                    max={59}
+                    onChange={(e) => {
+                      const minutes = e.target.value;
+                      form.setFieldValue("startTimeMinute", parseInt(minutes, 10));
+                    }}
+                    style={{ width: "100px" }}
+                  />
+                </Col>
+                {/* <DatePicker.TimePicker
+                locale={locale}
+                format="HH시"
+                placeholder="시간"
+                showNow={false}
+                minuteStep={60} // 시간 단위로 설정
+                popupClassName="time-picker-no-footer"
+                onSelect={(value) => {
+                  const selectedHour = value.hour();
+                  form.setFieldValue('startTimeHour', selectedHour);
+                }}
+              />
+              <DatePicker.TimePicker
+                locale={locale}
+                format="mm분"
+                placeholder="분"
+                showNow={false}
+                minuteStep={30}
+                popupClassName="time-picker-no-footer"
+                onSelect={(value) => {
+                  const selectedMinute = value.minute();
+                  form.setFieldValue('startTimeMinute', selectedMinute);
+                }}
+              /> */}
+              </Row>
+            </Form.Item>
+
+            <Form.Item
+              name="endTime"
+              label="활동이 끝날 시간"
+              css={cssPostDateStyle}
+              initialValue={dayjs().minute(0)}
+            // validateStatus={form.getFieldError('endTime') ? 'error' : ''}
+            // help={form.getFieldError('endTime')}
+            // rules={[
+            //   { validator: validateEndTime }
+            // ]}
+            >
+              <Row justify="start" align="top">
+                <Col>
+                  <Input type="number"
+                    placeholder="시간"
+                    min={0}
+                    max={23}
+                    onChange={(e) => {
+                      const hours = e.target.value;
+                      form.setFieldValue("endTimeHour", parseInt(hours, 10));
+                      // var fieldValue = form.getFieldValue("startTimeHour");
+                      // console.log(fieldValue);
+                    }}
+                    style={{ width: "100px" }}
+                  />
+                </Col>
+                <Col>
+                  <Input type="number"
+                    placeholder="분"
+                    min={0}
+                    max={59}
+                    onChange={(e) => {
+                      const minutes = e.target.value;
+                      form.setFieldValue("endTimeMinute", parseInt(minutes, 10));
+
+                      // var startTimeHourValue = form.getFieldValue("startTimeHour");
+                      // var startTimeMinuteValue = form.getFieldValue("startTimeMinute");
+
+                      // var endTimeHourValue = form.getFieldValue("endTimeHour");
+                      // var endTimeMinuteValue = form.getFieldValue("endTimeMinute");
+
+                      // // 새로운 Date 객체를 생성하여 시간 설정
+                      // const fullStartTime = new Date(startTime);
+                      // const fullEndTime = new Date(endTime);
+
+                      // fullStartTime.setHours(startTimeHourValue);
+                      // fullStartTime.setMinutes(startTimeMinuteValue);
+                      // fullStartTime.setSeconds(0);
+                      // setStartTime(fullStartTime);
+
+                      // fullEndTime.setHours(endTimeHourValue);
+                      // fullEndTime.setMinutes(endTimeMinuteValue);
+                      // fullEndTime.setSeconds(0);
+                      // setStartTime(fullEndTime);
+                    }}
+                    style={{ width: "100px" }}
+                  /* <DatePicker.TimePicker
+                      locale={locale}
+                      format="HH시"
+                      placeholder="시간"
+                      showNow={false}
+                      minuteStep={60} // 시간 단위로 설정
+                      popupClassName="time-picker-no-footer"
+                      onSelect={(value) => {
+                        const selectedHour = value.hour();
+                        form.setFieldValue('startTimeHour', selectedHour);
+                      }}
+                    />
+                    // <DatePicker.TimePicker
+                    //   locale={locale}
+                    //   format="mm분"
+                    //   placeholder="분"
+                    //   showNow={false}
+                    //   minuteStep={30}
+                    //   popupClassName="time-picker-no-footer"
+                    //   onSelect={(value) => {
+                    //     const selectedMinute = value.minute();
+                    //     form.setFieldValue('endTimeMinute', selectedMinute);
+                    //   }} */
+                  />
+                </Col>
+              </Row>
+            </Form.Item>
+
+          </div>
+          <div className="guide">
+            <div>
+              교환할 타임페이 양 :{' '}
+              <b>{exchangeTimepay ? exchangeTimepay + ' TP' : ''}</b>{' '}
+            </div>
+            <div>도움을 받은 분의 타임페이가 충분한지 확인해주세요.</div>
+          </div>
+
+          <Form.Item label="장소" name="location" css={cssPostDateStyle}>
+            <Input
+              size="large"
+              placeholder="여기에 장소를 입력하세요"
+              style={{
+                paddingLeft: '15px',
+                width: '230px',
+              }}
+              prefix={<FlagFilled style={{ marginRight: '5px' }} />}
+              onChange={(event) => {
+                handleLocationChange(event);
+                handleTimeLocationChange();
+              }}
+            />
+          </Form.Item>
+              </div>
+              </Form>  }
+            <Button onClick={() => setSection(0)}>이전 섹션으로</Button>
+            <Button onClick={() => setSection(2)}>다음 섹션으로</Button>
+          </>
+        )
+      }
+
+  // 섹션 3
+      {
+        section === 2 && (
+          <>
+            {<div css={cssPostPageStyle}>
+        {contextHolder}
+        
+
+        <Form onFinish={handleOnSubmit} form={form} layout="vertical">
+          
+
+          <div css={cssLineStyle} />
+
+          
+          <div css={cssLineStyle} />
+
+          <Form.Item label="제목" name="title" css={cssPostTitleStyle}>
+            <Input
+              css={cssPostTitleInputStyle}
+              placeholder="여기에 제목을 입력하세요"
+              maxLength={25}
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </Form.Item>
+
+          <Form.Item label="내용" name="content" css={cssPostContentStyle}>
+            <TextArea
+              rows={5}
+              style={{ resize: 'none' }}
+              css={cssPostContentInputStyle}
+              placeholder="여기에 내용을 입력하세요"
+              value={content}
+              onChange={handleContentChange}
+            />
+          </Form.Item>
+          <div css={cssLineStyle} />
+          <Form.Item
+            name="images"
+            getValueFromEvent={normFile}
+            valuePropName="fileList"
+            css={cssPostDateStyle}
+          >
+            <Upload
+              onChange={handleImgChange}
+              onPreview={handlePreview}
+              multiple={false}
+              beforeUpload={() => false}
+              accept="image/png, image/jpg, image/jpeg"
+            >
+              {imgFileList.length === 1 ? null : uploadButton}
+            </Upload>
+          </Form.Item>
+          <Form.Item
+            label=""
+            name="auto"
+            css={cssPostAutoStyle}
+            valuePropName="checked"
+            extra="설정 시 선착순으로 매칭됩니다."
+          >
+            <Checkbox>자동매칭 여부</Checkbox>
+          </Form.Item>
+          <div css={cssPostFooterStyle}>
+            {isDisabled ? (
+              <Button css={cssPostBtnStyle2}>작성완료</Button>
+            ) : (
+              <Button htmlType="submit" css={cssPostBtnStyle}>
+                작성완료
+              </Button>
+            )}
+          </div>
+        </Form>
+      </div>}
+            <Button onClick={() => setSection(1)}>이전 섹션으로</Button>
+            <Button htmlType="submit" css={cssPostBtnStyle}>
+              작성완료
+            </Button>
+            {contextHolder}
       <Steps
         direction="vertical"
         current={current}
@@ -353,6 +710,7 @@ const RegisterRequestPage = () => {
           },
         ]}
       />
+<<<<<<< Updated upstream
 
       <Form onFinish={handleOnSubmit} form={form} layout="vertical">
         {isAgency && (
@@ -666,6 +1024,11 @@ const RegisterRequestPage = () => {
           )}
         </div>
       </Form>
+=======
+          </>
+        )
+      }
+>>>>>>> Stashed changes
     </div>
   );
 };
