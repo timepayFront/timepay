@@ -99,4 +99,4 @@ export const cssBtnStyle1 = css`
   font-size:20px;
   height : 50px;
   box-sizing: border-box;
-`
+  `

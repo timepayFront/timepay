@@ -380,7 +380,16 @@ const MyPage = () => {
                   >
                     신청인 관리
                   </button>
+                  </div>
+                  <div className="MyPageMoveBox">
+                  <button
+                    className="MyPageText"
+                    onClick={() => handlePageMove(PATH.BANKING)}
+                  >
+                    송금하기
+                  </button>
                 </div>
+                
               </>
             ) : (
               <></>

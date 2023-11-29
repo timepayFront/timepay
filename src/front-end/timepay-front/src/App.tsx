@@ -35,6 +35,7 @@ function App() {
             <Route path={PATH.HOME} element={<PageRoutes.HomePage />} />
             <Route path={PATH.SEARCH} element={<PageRoutes.SearchPage />} />
             <Route path={PATH.MY_PAGE} element={<PageRoutes.MyPage />} />
+            <Route path={PATH.BANKING} element={<PageRoutes.BankingPage />} />
             <Route
               path={PATH.WritePage}
               element={<PageRoutes.WritePage />}
@@ -86,6 +87,7 @@ function App() {
               path={`${PATH.PAYMENT_CERTIFICATION}/:boardId`}
               element={<PageRoutes.VolunteerCertificationPaymentPage />}
             />
+            <Route path={PATH.SEARCH_HOME} element = {<PageRoutes.SearchHomePage/>} />
             <Route
               path={PATH.CATEGORY_SELECT}
               element={<CategorySelectPage />}

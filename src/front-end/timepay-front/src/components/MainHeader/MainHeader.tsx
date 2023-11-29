@@ -1,6 +1,7 @@
 import { Button, Layout, Modal } from 'antd';
 import { useRecoilValue } from 'recoil';
 import { headerTitleState } from '../../states/uiState';
+import { BellOutlined, UserOutlined } from '@ant-design/icons';
 import {
   cssBox,
   cssMainHeaderStyle,
@@ -15,6 +16,7 @@ import {
 } from '../../utils/token';
 import modal from 'antd/es/modal';
 import { COMMON_COLOR } from '../../styles/constants/colors';
+import { PATH } from '../../utils/paths';
 
 const MainHeader = () => {
   const navigate = useNavigate();
@@ -22,7 +24,9 @@ const MainHeader = () => {
   const handleClickBack = useCallback(() => {
     navigate(-1);
   }, [navigate]);
-
+  const handleOnLinkNotification = useCallback(() => {
+    navigate(PATH.NOTIFICATION);
+  }, [navigate]);
   const { confirm } = Modal;
   const token = getMultiTokenFromCookie();
 
@@ -57,6 +61,7 @@ const MainHeader = () => {
         <Layout.Header css={cssMainHeaderStyle}>
           <BackArrow onClick={handleClickBack} />
           <span className="header-title">{headerTitle}</span>
+          
         </Layout.Header>
       ) : (
         <div css={cssBox}>
