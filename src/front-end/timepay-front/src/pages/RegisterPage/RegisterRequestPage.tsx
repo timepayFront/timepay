@@ -10,6 +10,8 @@ import {
   DatePicker,
   Checkbox,
   Modal,
+  Row,
+  Col
 } from 'antd';
 import { RcFile, UploadChangeParam, UploadProps } from 'antd/es/upload';
 import { useCallback, useState, useMemo, useEffect } from 'react';
@@ -47,6 +49,9 @@ import {
   cssPostAutoStyle,
   cssPostInputNumberStyle,
 } from './RegisterRequest.styles';
+import moment from 'moment';
+import { Rule } from 'antd/lib/form';
+
 
 const { TextArea } = Input;
 const MAX_IMAGES = 5;
@@ -248,12 +253,12 @@ const RegisterRequestPage = () => {
               : 0
             : 0,
           images: null,
-          startTime: `${values.activityDate.format(
+          startTime: `${moment(values.activityDate).format(
             'YYYY-MM-DD',
-          )}T${values.startTime.format('HH:mm:ss')}.000Z`,
-          endTime: `${values.activityDate.format(
+          )}T${moment(values.startTime).format('HH:mm:ss')}.000Z`,
+          endTime: `${moment(values.activityDate).format(
             'YYYY-MM-DD',
-          )}T${values.endTime.format('HH:mm:ss')}.000Z`,
+          )}T${moment(values.endTime).format('HH:mm:ss')}.000Z`,
           pay: exchangeTimepay,
         };
 
@@ -313,6 +318,19 @@ const RegisterRequestPage = () => {
   const handleTimeLocationChange = () => {
     setCurrent(2); // startTime과 endTime 값을 가져옵니다.
   };
+
+  // const [startTime, setStartTime] = useState(new Date());  // 각각 입력된 값을 DatePicker 형식으로 바꾸기 위함
+  // const [endTime, setEndTime] = useState(new Date());
+
+  // const validateEndTime = (rule: Rule) => {
+  //   const startTime = form.getFieldValue('startTime');
+  //   const endTime = form.getFieldValue('endTime');
+  //   if (endTime && startTime && endTime.isBefore(startTime)) {
+  //     return Promise.reject('종료 시간은 시작 시간보다 빨라야 합니다.');
+  //   }
+  //   return Promise.resolve();
+  // };
+
 
   return (
     <div>
@@ -562,6 +580,7 @@ const RegisterRequestPage = () => {
                 </Col>
               </Row>
             </Form.Item>
+
           </div>
           <div className="guide">
             <div>
