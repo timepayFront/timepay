@@ -321,14 +321,38 @@ const MyPage = () => {
 
         <div css={cssMyPageButtonBlock(scaleValue)}>
           <div className="MyBlockBox">
-            { <div className="MyPageMoveBox">
+            {/* <div className="MyPageMoveBox">
               <button
                 className="MyPageText"
                 onClick={() => handlePageMove(PATH.MY_ACTIVITY_RECORD)}
               >
                 활동 기록
               </button>
-            </div> }
+            </div> */}
+            {<div className="MyPageMoveBox">
+              <button
+                className="MyPageText"
+                onClick={() => handlePageMove(PATH.SHARE)}
+              >
+                사이트 공유하기
+              </button>
+            </div>}
+            {<div className="MyPageMoveBox">
+              <button
+                className="MyPageText"
+                onClick={() => handlePageMove(PATH.MY_ACTIVITY_RECORD)}
+              >
+                활동 내역
+              </button>
+            </div>}
+            {/*<div className="MyPageMoveBox">
+              <button
+                className="MyPageText"
+                onClick={() => handlePageMove(PATH.NOTIFICATION)}
+              >
+                알림
+              </button>
+            </div>*/}
             {!agencyInfo && (
               <div className="MyPageMoveBox">
                 <button

@@ -48,7 +48,6 @@ export const cssHomePageStyle = (scaleValue: number) => css`
     flex-direction: column;
     align-items: center;
     gap: calc(20px * ${scaleValue});
-
     font-style: normal;
     font-weight: 700;
     font-size: calc(18px * ${scaleValue});

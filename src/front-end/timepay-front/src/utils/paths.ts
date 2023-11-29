@@ -9,6 +9,7 @@ export const PATH = {
   WritePage: '/write-page',  // WritePage 경로
   Register_HR: '/register/help-request',
   Register_HS: '/register/help-serve',
+  WritePage: '/write-page',  // WritePage 경로
   Register_F: '/register/free',
   NOTIFICATION: '/notification',
   Qna_List: '/inquire',
