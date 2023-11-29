@@ -96,6 +96,49 @@ export const cssLineStyle = css`
   margin-bottom: 15px;
 `;
 
+export const cssPostFooterNextStyle = css`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 0;
+  
+  
+`;
+
+export const cssPostBtnRightStyle = css`
+  width: 50%;
+  height: 70px;
+  background: ${COMMON_COLOR.MAIN1};
+  color: ${COMMON_COLOR.WHITE};
+  border: none;
+  letter-spacing: 3px;
+  font-size: 20px;
+  font-weight: 600;
+  `;
+
+  export const cssPostBtnFirstStyle = css`
+  width: 50%;
+  height: 70px;
+  background: ${COMMON_COLOR.MAIN1};
+  color: ${COMMON_COLOR.WHITE};
+  border: none;
+  letter-spacing: 3px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left:50%;
+  `;
+
+  export const cssPostBtnLeftStyle = css`
+  width: 50%;
+  height: 70px;
+  background: ${COMMON_COLOR.MAIN1};
+  color: ${COMMON_COLOR.WHITE};
+  border: none;
+  letter-spacing: 3px;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
 export const cssPostFooterStyle = css`
   position: fixed;
   width: 100%;
