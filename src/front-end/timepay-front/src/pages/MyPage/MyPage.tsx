@@ -380,6 +380,7 @@ const MyPage = () => {
                   >
                     신청인 관리
                   </button>
+                  </div>
                   <div className="MyPageMoveBox">
                   <button
                     className="MyPageText"
@@ -388,7 +389,7 @@ const MyPage = () => {
                     송금하기
                   </button>
                 </div>
-                </div>
+                
               </>
             ) : (
               <></>
