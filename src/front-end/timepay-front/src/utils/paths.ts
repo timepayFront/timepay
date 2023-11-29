@@ -34,7 +34,8 @@ export const PATH = {
   AGENT: '/agent',
   APPLICANT: '/applicant',
   SHARE: '/share',
-  SEARCH_HOME: '/search-home'
+  SEARCH_HOME: '/search-home',
+  BANKING: '/banking',
 };
 
 export const deployHostName = 'http://13.125.249.51';
