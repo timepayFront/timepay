@@ -1,5 +1,5 @@
 import {
-    cssBtnStyle1,
+    cssBtnStyle1,cssWriteContainer,
   } from './WritePage.styles';
   import { MenuProps, Modal } from 'antd';
   import { Button } from 'antd';
@@ -9,7 +9,7 @@ import {
   import { useGetUserInfo } from '../../api/hooks/user';
   import { headerTitleState } from '../../states/uiState';
   import { useSetRecoilState } from 'recoil';
-  
+
   const WritePage = () => {
   
     const setHeaderTitle = useSetRecoilState(headerTitleState);
@@ -37,34 +37,34 @@ import {
         },
       });
     }, [data]);
-  
-    const items: MenuProps['items'] = useMemo(() => {
-      const items = [
-        {
-          key: PATH.Register_HR,
-          label: <Link to={PATH.Register_HR}>도움요청</Link>,
-        },
-        {
-          key: PATH.Register_HS,
-          label: <Link to={PATH.Register_HS}>같이하기</Link>,
-        },
-      ];
-      if (isAgency)
-        items.push({
-          key: PATH.DONATION_BOARD_WRITE,
-          label: <Link to={PATH.DONATION_BOARD_WRITE}>기부하기</Link>,
-        });
-      else
-        items.push({
-          key: '바로도움요청',
-          label: (
-            <Button type="link" onClick={handleOnShowQRModal}>
-              바로도움요청
-            </Button>
-          ),
-        });
-      return items;
-    }, [isAgency, handleOnShowQRModal]);
+
+    // const items: MenuProps['items'] = useMemo(() => {
+    //   const items = [
+    //     {
+    //       key: PATH.Register_HR,
+    //       label: <Link to={PATH.Register_HR}>도움요청</Link>,
+    //     },
+    //     {
+    //       key: PATH.Register_HS,
+    //       label: <Link to={PATH.Register_HS}>같이하기</Link>,
+    //     },
+    //   ];
+    //   if (isAgency)
+    //     items.push({
+    //       key: PATH.DONATION_BOARD_WRITE,
+    //       label: <Link to={PATH.DONATION_BOARD_WRITE}>기부하기</Link>,
+    //     });
+    //   else
+    //     items.push({
+    //       key: '바로도움요청',
+    //       label: (
+    //         <Button type="link" onClick={handleOnShowQRModal}>
+    //           바로도움요청
+    //         </Button>
+    //       ),
+    //     });
+    //   return items;
+    // }, [isAgency, handleOnShowQRModal]);
   
     useEffect(() => {
       setHeaderTitle('글쓰기');
@@ -72,12 +72,14 @@ import {
   
     return (
       <>
-        <div style={{position: 'fixed', width: '100vw', height: '79vh', display: 'flex', flexDirection: 'column'}}>
-          <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청<br/>도움이 필요할 때<br/>다른 사람들에게 요청해보세요!</Link></Button>
+      {/* <div css={cssWriteContainer}> */}
+      <div style={{position: 'fixed', width: '100vw', height: '79vh', display: 'flex', flexDirection: 'column'}}>
+          <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청<br/>도움이 필요할 때<br/>다른 분에게 요청해보세요!</Link></Button>
           <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기<br/>마음이 맞는 사람끼리<br/>같이 활동해보세요!</Link></Button>
           <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청<br/>급하게 도움이 필요할 때<br/>도움을 요청해보세요!</Link></Button>
-        </div>
-        </>
+        {/* </div> */}
+      </div>
+      </>
     );
   };
   
