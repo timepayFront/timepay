@@ -334,7 +334,7 @@ const MyPage = () => {
                 className="MyPageText"
                 onClick={() => handlePageMove(PATH.SHARE)}
               >
-                사이트 공유하기
+                마을시간은행 초대하기
               </button>
             </div>}
             {<div className="MyPageMoveBox">
