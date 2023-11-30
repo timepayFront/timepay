@@ -98,3 +98,30 @@ export const cssCategoryListStyle = (scaleValue: number) => css`
     color: ${COMMON_COLOR.FONT2};
   }
 `;
+
+export const cssBtnStyle1 = css`
+  flex: 1;
+  font-size: 20px;
+  width: 33vw;
+  height: 30vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+export const cssWriteContainer = css`
+  display: flex;
+  position: fixed;
+  bottom: 0; /* 화면 하단에 위치하도록 설정 */
+  left: 0;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh; /* 버튼 높이의 2배로 설정 */
+`;
+

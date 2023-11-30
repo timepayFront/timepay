@@ -16,7 +16,7 @@ export const cssHomePageStyle = (scaleValue: number) => css`
     flex-direction: column;
     align-items: center;
     gap: calc(30px * ${scaleValue});
-    background-color: ${COMMON_COLOR.LOGO1};
+    /* background-color: ${COMMON_COLOR.LOGO1}; */
     padding-top: 100px;
     padding-bottom: calc(36px * ${scaleValue});
     .title-search {
@@ -24,8 +24,8 @@ export const cssHomePageStyle = (scaleValue: number) => css`
       flex-direction: row;
       gap: calc(5px * ${scaleValue});
       .ant-btn {
-        border-color: ${COMMON_COLOR.WHITE};
-        color: ${COMMON_COLOR.WHITE};
+        border-color: ${COMMON_COLOR.BLACK};
+        color: ${COMMON_COLOR.BLACK};
         font-style: normal;
         font-weight: 700;
         font-size: calc(18px * ${scaleValue});
