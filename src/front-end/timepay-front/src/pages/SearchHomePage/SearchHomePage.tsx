@@ -113,7 +113,6 @@ import {
         )}
   
         <div className="title-search-container">
-          <Logo />
           <div className="title-search">
             <Input
               defaultValue={boardSearchValue.title}
@@ -130,7 +129,6 @@ import {
             <Spin size="large" />
           ) : (
             <>
-              <div>당신의 도움이 필요해요!</div>
               <div css={cssCategoryListStyle(scaleValue)}>
                 {data?.data.map((category) => (
                   <Button
@@ -143,11 +141,6 @@ import {
               </div>
             </>
           )}
-        </div>
-        <div className="info-container">
-          타임페이 커뮤니티에서 모든 사용자는 도움을 주는 대가로 타임페이를 받을
-          수 있어요. <br />
-          받은 타임페이로 필요한 곳에 도움을 요청해보세요!
         </div>
       </div>
     );    
