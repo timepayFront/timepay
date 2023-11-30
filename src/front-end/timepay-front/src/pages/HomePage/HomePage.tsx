@@ -3,12 +3,14 @@ import {
   cssCategoryListStyle,
   cssHomePageStyle,
   cssSearch,
+  cssBtnStyle1,
+  cssWriteContainer,
 } from './HomePage.styles';
 import { ReactComponent as Logo } from '../../assets/images/icons/timepay-character-logo.svg';
 import { Button, Dropdown, Input, Modal, Spin } from 'antd';
 import { useGetCategory } from '../../api/hooks/category';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useMemo,useEffect } from 'react';
 import { PATH } from '../../utils/paths';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AlignRightOutlined, BellOutlined, UserOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
@@ -22,6 +24,11 @@ import {
   setMultiTokenToCookie,
 } from '../../utils/token';
 import { COMMON_COLOR } from '../../styles/constants/colors';
+
+//*********/
+import {Link} from 'react-router-dom';
+import { useGetUserInfo } from '../../api/hooks/user';
+import { headerTitleState } from '../../states/uiState';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -93,6 +100,34 @@ const HomePage = () => {
       cancelText: '취소',
     });
   }, [confirm, logoutToken]);
+
+  //write
+  const setHeaderTitle = useSetRecoilState(headerTitleState);
+  
+  const { data:userInfoData } = useGetUserInfo();
+
+  const [isOpenQR, setIsOpenQR] = useState(false);
+
+  const isAgency = useMemo(() => {
+    if (userInfoData?.data.body.manager_name) return true;
+    return false;
+  }, [userInfoData]);
+
+  const handleOnLinkWrite = () => {
+    navigate(PATH.WritePage);
+  };
+
+  const handleOnShowQRModal = useCallback(() => {
+    Modal.confirm({
+      content: '도움이 필요한 분만 눌러주세요!',
+      okText: '도움이 필요합니다',
+      cancelText: '취소',
+      onOk: () => {
+        if (userInfoData?.data.body.id) setIsOpenQR(true);
+      },
+    });
+  }, [userInfoData]);
+
   return (
     <div css={cssHomePageStyle(scaleValue)}>
       {!token || token === 'undefined' ? (
@@ -115,7 +150,7 @@ const HomePage = () => {
           {/* 알림 */}
         </Button>
         <Logo />
-        <div className="title-search">
+        {/* <div className="title-search">
           <Input
             defaultValue={boardSearchValue.title}
             onChange={handleOnChange}
@@ -124,7 +159,7 @@ const HomePage = () => {
           <Button type="ghost" onClick={handleOnSearchTitle}>
             검색
           </Button>
-        </div>
+        </div> */}
       </div>
       <div className="category-search-container">
         {isLoading ? (
@@ -150,7 +185,15 @@ const HomePage = () => {
         수 있어요. <br />
         받은 타임페이로 필요한 곳에 도움을 요청해보세요!
       </div>
+      <div css={cssWriteContainer}>
+        {/* <div style={{position: 'fixed', width: '100vw', height: '79vh', display: 'flex', flexDirection: 'column'}}> */}
+          <Button css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청<br/>도움이 필요할 때<br/>다른 분에게 요청해보세요!</Link></Button>
+          <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기<br/>마음이 맞는 사람끼리<br/>같이 활동해보세요!</Link></Button>
+          <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청<br/>급하게 도움이 필요할 때<br/>도움을 요청해보세요!</Link></Button>
+        {/* </div> */}
+      </div>
     </div>
+    
   );
 };
 
