@@ -99,6 +99,7 @@ const AgentModal = ({ myUID, isOpen, onCancel }: AgentModalProps) => {
         <Form form={form} layout="horizontal">
           <Form.Item name="uid">
             <InputNumber
+              id="mph"
               style={{ width: 210 }}
               placeholder="대리인의 UID를 입력해주세요"
             />
