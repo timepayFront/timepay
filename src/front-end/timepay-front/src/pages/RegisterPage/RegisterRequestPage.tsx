@@ -72,6 +72,8 @@ const RegisterRequestPage = () => {
   const [imgFileList, setImgFileList] = useState<UploadFile[]>([]);
   const [previewImage, setPreviewImage] = useState('');
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+
 
   const createDealBoardsMutation = useCreateDealBoards();
   const [messageApi, contextHolder] = message.useMessage();
@@ -429,14 +431,23 @@ const RegisterRequestPage = () => {
           <>
             {
               <div css={cssPostPageStyle}>
-              <Form.Item
-            name="activityDate"
-            label="활동일"
-            initialValue={dayjs()}
-            css={cssPostDateStyle}
-          >
-            <DatePicker format="YYYY년 MM월 DD일" />
-          </Form.Item>
+                <Form.Item
+                  label="활동일"
+                  initialValue={selectedDate}
+                  css={cssPostDateStyle}
+                >
+                  <DatePicker
+                    format="YYYY년 MM월 DD일"
+                    className='activityDate'
+                    value={selectedDate}
+                    onChange={(date) => {
+                      if (date !== null) {
+                        setSelectedDate(date)
+                      }
+                    }
+                  }
+                  />
+                </Form.Item>
 
           <div className="time">
             <Form.Item
@@ -451,6 +462,7 @@ const RegisterRequestPage = () => {
                     placeholder="시간"
                     min={0}
                     max={23}
+                    value = {form.getFieldValue("startTimeHour")}
                     onChange={(e) => {
                       const hours = e.target.value;
                       form.setFieldValue("startTimeHour", parseInt(hours, 10));
@@ -463,6 +475,7 @@ const RegisterRequestPage = () => {
                     placeholder="분"
                     min={0}
                     max={59}
+                    value={form.getFieldValue("startTimeMinute")}
                     onChange={(e) => {
                       const minutes = e.target.value;
                       form.setFieldValue("startTimeMinute", parseInt(minutes, 10));
@@ -514,6 +527,7 @@ const RegisterRequestPage = () => {
                     placeholder="시간"
                     min={0}
                     max={23}
+                    value={form.getFieldValue("endTimeHour")}
                     onChange={(e) => {
                       const hours = e.target.value;
                       form.setFieldValue("endTimeHour", parseInt(hours, 10));
@@ -528,6 +542,7 @@ const RegisterRequestPage = () => {
                     placeholder="분"
                     min={0}
                     max={59}
+                    value={form.getFieldValue("endTimeMinute")}
                     onChange={(e) => {
                       const minutes = e.target.value;
                       form.setFieldValue("endTimeMinute", parseInt(minutes, 10));
@@ -590,7 +605,7 @@ const RegisterRequestPage = () => {
             <div>도움을 받은 분의 타임페이가 충분한지 확인해주세요.</div>
           </div>
 
-          <Form.Item label="장소" name="location" css={cssPostDateStyle}>
+          <Form.Item label="장소" css={cssPostDateStyle}>
             <Input
               size="large"
               placeholder="여기에 장소를 입력하세요"
@@ -598,6 +613,7 @@ const RegisterRequestPage = () => {
                 paddingLeft: '15px',
                 width: '230px',
               }}
+              value={location}
               prefix={<FlagFilled style={{ marginRight: '5px' }} />}
               onChange={(event) => {
                 handleLocationChange(event);
