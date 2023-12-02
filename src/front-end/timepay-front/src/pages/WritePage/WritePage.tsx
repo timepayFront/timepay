@@ -9,6 +9,8 @@ import {
   import { useGetUserInfo } from '../../api/hooks/user';
   import { headerTitleState } from '../../states/uiState';
   import { useSetRecoilState } from 'recoil';
+  import { ReactComponent as BackArrow } from '../../assets/images/icons/header-back-arrow.svg';
+  import { cssMainHeaderStyle } from '../../components/MainHeader/MainHeader.styles';
 
   const WritePage = () => {
   
@@ -46,10 +48,18 @@ import {
     useEffect(() => {
       setHeaderTitle('글쓰기');
     }, [setHeaderTitle]);
+
+    const handleClickBack = useCallback(() => {
+      navigate(PATH.HOME);
+    }, [navigate]);
   
     return (
       <>
       {/* <div css={cssWriteContainer}> */}
+      <div css={cssMainHeaderStyle}>
+        <BackArrow onClick={handleClickBack} />
+        <span>글쓰기</span>
+      </div>
       <div style={{position: 'fixed', width: '100vw', height: '79vh', display: 'flex', flexDirection: 'column'}}>
           <Button onClick={handleOnLinkRequest} css={cssBtnStyle1}><Link to={PATH.Register_HR}>도움요청<br/>도움이 필요할 때<br/>다른 분에게 요청해보세요!</Link></Button>
           <Button onClick={handleOnLinkWith} css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기<br/>마음이 맞는 사람끼리<br/>같이 활동해보세요!</Link></Button>

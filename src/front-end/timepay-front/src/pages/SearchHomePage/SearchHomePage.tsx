@@ -21,6 +21,8 @@ import {
   } from '../../utils/token';
   import { COMMON_COLOR } from '../../styles/constants/colors';
   import { headerTitleState } from '../../states/uiState';
+  import { ReactComponent as BackArrow } from '../../assets/images/icons/header-back-arrow.svg';
+  import { cssMainHeaderStyle } from '../../components/MainHeader/MainHeader.styles';
 
   const SearchHomePage = () => {
 
@@ -95,8 +97,16 @@ import {
       setHeaderTitle('검색');
     }, [setHeaderTitle]);
 
+    const handleClickBack = useCallback(() => {
+      navigate(PATH.HOME);
+    }, [navigate]);
+
     return (
       <div css={cssHomePageStyle(scaleValue)}>
+        <div css={cssMainHeaderStyle}>
+        <BackArrow onClick={handleClickBack} />
+        <span>검색</span>
+      </div>
         {!token || token === 'undefined' ? (
           <div></div>
         ) : (

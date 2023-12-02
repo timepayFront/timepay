@@ -21,9 +21,12 @@ import { PATH } from '../../utils/paths';
 const MainHeader = () => {
   const navigate = useNavigate();
   const headerTitle = useRecoilValue(headerTitleState);
+  
+
   const handleClickBack = useCallback(() => {
-    navigate(-1);
+      navigate(-1);
   }, [navigate]);
+
   const handleOnLinkNotification = useCallback(() => {
     navigate(PATH.NOTIFICATION);
   }, [navigate]);
