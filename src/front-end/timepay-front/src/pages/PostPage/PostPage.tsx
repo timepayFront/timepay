@@ -120,7 +120,7 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    if (type === 'help') {
+    if (type === 'help' ||  type === 'success') {
       setHeaderTitle('도움요청');
     } else {
       setHeaderTitle('같이하기');
