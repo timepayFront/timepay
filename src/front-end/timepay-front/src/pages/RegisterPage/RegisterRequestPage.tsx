@@ -432,20 +432,13 @@ const RegisterRequestPage = () => {
             {
               <div css={cssPostPageStyle}>
                 <Form.Item
+                  name="activityDate"
                   label="활동일"
-                  initialValue={selectedDate}
+                  initialValue={dayjs()}
                   css={cssPostDateStyle}
                 >
                   <DatePicker
                     format="YYYY년 MM월 DD일"
-                    className='activityDate'
-                    value={selectedDate}
-                    onChange={(date) => {
-                      if (date !== null) {
-                        setSelectedDate(date)
-                      }
-                    }
-                  }
                   />
                 </Form.Item>
 
@@ -456,147 +449,76 @@ const RegisterRequestPage = () => {
               css={cssPostDateStyle}
               initialValue={dayjs().minute(0)}
             >
-              <Row justify="start" align="top">
-                <Col>
-                  <Input type="number"
-                    placeholder="시간"
-                    min={0}
-                    max={23}
-                    value = {form.getFieldValue("startTimeHour")}
-                    onChange={(e) => {
-                      const hours = e.target.value;
-                      form.setFieldValue("startTimeHour", parseInt(hours, 10));
-                    }}
-                    style={{ width: "100px" }}
-                  />
-                </Col>
-                <Col>
-                  <Input type="number"
-                    placeholder="분"
-                    min={0}
-                    max={59}
-                    value={form.getFieldValue("startTimeMinute")}
-                    onChange={(e) => {
-                      const minutes = e.target.value;
-                      form.setFieldValue("startTimeMinute", parseInt(minutes, 10));
-                    }}
-                    style={{ width: "100px" }}
-                  />
-                </Col>
-                {/* <DatePicker.TimePicker
-                locale={locale}
-                format="HH시"
-                placeholder="시간"
-                showNow={false}
-                minuteStep={60} // 시간 단위로 설정
-                popupClassName="time-picker-no-footer"
-                onSelect={(value) => {
-                  const selectedHour = value.hour();
-                  form.setFieldValue('startTimeHour', selectedHour);
-                }}
-              />
               <DatePicker.TimePicker
-                locale={locale}
-                format="mm분"
-                placeholder="분"
-                showNow={false}
-                minuteStep={30}
-                popupClassName="time-picker-no-footer"
-                onSelect={(value) => {
-                  const selectedMinute = value.minute();
-                  form.setFieldValue('startTimeMinute', selectedMinute);
-                }}
-              /> */}
-              </Row>
+              locale={locale}
+              format="HH시 mm분"
+              placeholder="시간"
+              showNow={false}
+              minuteStep={30}
+              popupClassName="time-picker-no-footer"
+              onSelect={(value) => {
+                form.setFieldValue('startTime', value);
+                console.log('Selected Start Time:', value);
+                handleOnChangeTime({ startTime: value }, form.getFieldsValue());
+              }}
+            />
             </Form.Item>
 
             <Form.Item
-              name="endTime"
-              label="활동이 끝날 시간"
-              css={cssPostDateStyle}
-              initialValue={dayjs().minute(0)}
-            // validateStatus={form.getFieldError('endTime') ? 'error' : ''}
-            // help={form.getFieldError('endTime')}
-            // rules={[
-            //   { validator: validateEndTime }
-            // ]}
-            >
-              <Row justify="start" align="top">
-                <Col>
-                  <Input type="number"
-                    placeholder="시간"
-                    min={0}
-                    max={23}
-                    value={form.getFieldValue("endTimeHour")}
-                    onChange={(e) => {
-                      const hours = e.target.value;
-                      form.setFieldValue("endTimeHour", parseInt(hours, 10));
-                      // var fieldValue = form.getFieldValue("startTimeHour");
-                      // console.log(fieldValue);
-                    }}
-                    style={{ width: "100px" }}
-                  />
-                </Col>
-                <Col>
-                  <Input type="number"
-                    placeholder="분"
-                    min={0}
-                    max={59}
-                    value={form.getFieldValue("endTimeMinute")}
-                    onChange={(e) => {
-                      const minutes = e.target.value;
-                      form.setFieldValue("endTimeMinute", parseInt(minutes, 10));
-
-                      // var startTimeHourValue = form.getFieldValue("startTimeHour");
-                      // var startTimeMinuteValue = form.getFieldValue("startTimeMinute");
-
-                      // var endTimeHourValue = form.getFieldValue("endTimeHour");
-                      // var endTimeMinuteValue = form.getFieldValue("endTimeMinute");
-
-                      // // 새로운 Date 객체를 생성하여 시간 설정
-                      // const fullStartTime = new Date(startTime);
-                      // const fullEndTime = new Date(endTime);
-
-                      // fullStartTime.setHours(startTimeHourValue);
-                      // fullStartTime.setMinutes(startTimeMinuteValue);
-                      // fullStartTime.setSeconds(0);
-                      // setStartTime(fullStartTime);
-
-                      // fullEndTime.setHours(endTimeHourValue);
-                      // fullEndTime.setMinutes(endTimeMinuteValue);
-                      // fullEndTime.setSeconds(0);
-                      // setStartTime(fullEndTime);
-                    }}
-                    style={{ width: "100px" }}
-                  /* <DatePicker.TimePicker
-                      locale={locale}
-                      format="HH시"
-                      placeholder="시간"
-                      showNow={false}
-                      minuteStep={60} // 시간 단위로 설정
-                      popupClassName="time-picker-no-footer"
-                      onSelect={(value) => {
-                        const selectedHour = value.hour();
-                        form.setFieldValue('startTimeHour', selectedHour);
-                      }}
-                    />
-                    // <DatePicker.TimePicker
-                    //   locale={locale}
-                    //   format="mm분"
-                    //   placeholder="분"
-                    //   showNow={false}
-                    //   minuteStep={30}
-                    //   popupClassName="time-picker-no-footer"
-                    //   onSelect={(value) => {
-                    //     const selectedMinute = value.minute();
-                    //     form.setFieldValue('endTimeMinute', selectedMinute);
-                    //   }} */
-                  />
-                </Col>
-              </Row>
-            </Form.Item>
-
-          </div>
+            name="endTime"
+            label="활동이 끝날 시간"
+            css={cssPostDateStyle}
+            initialValue={dayjs().minute(0)}
+          >
+            <DatePicker.TimePicker
+              locale={locale}
+              format="HH시 mm분"
+              placeholder="시간"
+              showNow={false}
+              minuteStep={30}
+              allowClear={false}
+              popupClassName="time-picker-no-footer"
+              onSelect={(value) => {
+                form.setFieldValue('endTime', value);
+                handleOnChangeTime({ endTime: value }, form.getFieldsValue());
+              }}
+              disabledTime={(now) => {
+                return {
+                  disabledHours: () => {
+                    const { startTime } = form.getFieldsValue(['startTime']);
+                    if (startTime) {
+                      const selectedHour = startTime.hour();
+                      const selectedMinute = startTime.minute();
+                      if (startTime) {
+                        if (selectedMinute === 30) {  // 30분 선택 시, 선택한 시간 이후부터 가능
+                          return Array.from({ length: selectedHour+1 }, (_, i) => i);
+                        } else {  // 00분 선택 시, 선택한 시간부터 가능
+                          return Array.from({ length: selectedHour }, (_, i) => i);
+                        }
+                      }
+                    }
+                    return [];
+                  },
+                  disabledMinutes: (hour) => {
+                    const { startTime } = form.getFieldsValue(['startTime']);
+                    if (startTime) {
+                      const selectedHour = startTime.hour();
+                      const selectedMinute = startTime.minute();
+                      if (selectedHour === hour) {
+                        if (selectedMinute === 0) {
+                          // 00분 선택 시, 30분만 가능
+                          return Array.from({ length: selectedMinute + 30 }, (_, i) => i);
+                        }
+                      }
+                    }
+                    return [];
+                  },
+                };
+              }}
+            />
+          </Form.Item>
+        </div>
+            
           <div className="guide">
             <div>
               교환할 타임페이 양 :{' '}
