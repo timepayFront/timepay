@@ -93,7 +93,7 @@ const PostEditPage = () => {
                 boardId: boardId,
                 board: {
                   ...values,
-                  category: '기부하기',
+                  category: values.category,
                   targetTimePay: parseInt(values.targetTimePay),
                 },
               },
