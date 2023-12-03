@@ -132,7 +132,7 @@ const MainFooter = () => {
           알림
         </Button> */}
         <NavLink
-          to={PATH.WritePage}
+          to={PATH.HOME}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
         >
           <Button>
