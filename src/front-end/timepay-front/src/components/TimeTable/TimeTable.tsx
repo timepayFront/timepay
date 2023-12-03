@@ -126,6 +126,14 @@ const TimeTable = () => {
           minute: '2-digit',
           meridiem: false,
         }}
+        scrollTime='11:00'
+        // slotMinTime='8:00' // 캘린더의 시작 시간을 00:00으로 설정
+        // slotMaxTime='19:00' // 캘린더의 종료 시간을 24:00으로 설정
+        // businessHours={{
+        //   daysOfWeek: [0, 1, 2, 3, 4, 5, 6], // 월요일부터 금요일까지
+        //   startTime: '08:00', // 오전 9시
+        //   endTime: '19:00', // 오후 5시
+        // }}
       />
     </div>
   );
