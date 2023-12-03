@@ -1,5 +1,5 @@
 import {
-    cssBtnStyle1,cssWriteContainer,
+    cssBtnStyle1 ,
   } from './WritePage.styles';
   import { MenuProps, Modal } from 'antd';
   import { Button } from 'antd';
