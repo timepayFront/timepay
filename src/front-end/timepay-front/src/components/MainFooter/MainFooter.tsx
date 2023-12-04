@@ -102,7 +102,7 @@ const MainFooter = () => {
         <Button css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기</Link></Button>
         <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청</Link></Button> */}
       </div>
-      
+
 
       {/* <div className="float" css={cssFloating}>
         {isViewWriteBtn && (
@@ -136,7 +136,7 @@ const MainFooter = () => {
           className={({ isActive }) => (isActive ? 'active' : undefined)}
         >
           <Button>
-            <EditOutlined/>
+            <EditOutlined />
             글쓰기
           </Button>
         </NavLink>
@@ -147,7 +147,7 @@ const MainFooter = () => {
         >
           <Button>
             <SearchOutlined />
-              검색
+            검색
           </Button>
         </NavLink>
 
@@ -177,7 +177,7 @@ const MainFooter = () => {
         >
           <Button>
             <UserOutlined />
-              내 정보
+            내 정보
           </Button>
         </NavLink>
       </Layout.Footer>

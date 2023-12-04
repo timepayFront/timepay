@@ -24,6 +24,7 @@ import {
   setMultiTokenToCookie,
 } from '../../utils/token';
 import { COMMON_COLOR } from '../../styles/constants/colors';
+import InstantActivityQRModal from '../../components/InstantActivityQRModal';
 
 //*********/
 import {Link} from 'react-router-dom';
@@ -36,6 +37,10 @@ const HomePage = () => {
   const boardSearchValue = useRecoilValue(boardSearchState);
   const setBoardSearchState = useSetRecoilState(boardSearchState);
   const { scaleValue } = useFontSize();
+
+  const handleOnCloseQRModal = useCallback(() => {
+    setIsOpenQR(false);
+  }, []);
 
   const { data, isLoading } = useGetCategory({
     type: '도움요청',
@@ -128,7 +133,7 @@ const HomePage = () => {
       okText: '도움이 필요합니다',
       cancelText: '취소',
       onOk: () => {
-        if (userInfoData?.data.body.id) setIsOpenQR(true);
+        setIsOpenQR(true);
       },
     });
   }, [userInfoData]);
@@ -196,6 +201,13 @@ const HomePage = () => {
           <Button onClick={handleOnLinkWith} css={cssBtnStyle1}><Link to={PATH.Register_HS}>같이하기<br/>마음이 맞는 사람끼리<br/>같이 활동해보세요!</Link></Button>
           <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}>바로도움요청<br/>급하게 도움이 필요할 때<br/>도움을 요청해보세요!</Link></Button>
         {/* </div> */}
+      </div>
+      <div>
+      <InstantActivityQRModal
+        isOpen={isOpenQR}
+        onCancel={handleOnCloseQRModal}
+        helpPk={useGetUserInfo().data?.data.body.id}
+      />
       </div>
     </div>
     
