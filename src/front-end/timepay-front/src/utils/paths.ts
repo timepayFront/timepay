@@ -38,4 +38,4 @@ export const PATH = {
   BANKING: '/banking',
 };
 
-export const deployHostName = 'http://13.125.249.51';
+export const deployHostName = 'http://timepay.cs.kookmin.ac.kr/app/';
