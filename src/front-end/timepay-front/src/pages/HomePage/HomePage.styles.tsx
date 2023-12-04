@@ -80,6 +80,8 @@ export const cssHomePageStyle = (scaleValue: number) => css`
     margin: auto;
     word-break: keep-all;
     padding-bottom: calc(20px * ${scaleValue});
+    justify-content: center;
+    margin-top: 30px;
   }
 `;
 
@@ -109,7 +111,13 @@ export const cssBtnStyle1 = css`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  span{
+    font-size:25px
+  }
   @media (max-width: 768px) {
+    span{
+      font-size:20px
+    }
     font-size: 12px;
   }
 `;
@@ -124,4 +132,5 @@ export const cssWriteContainer = css`
   align-items: center;
   height: 50vh; /* 버튼 높이의 2배로 설정 */
 `;
+
 
