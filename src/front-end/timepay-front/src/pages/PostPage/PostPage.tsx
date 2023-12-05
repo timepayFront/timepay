@@ -120,12 +120,15 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    if (type === 'help' ||  type === 'success') {
+    console.log(type);
+    if (type === 'help') {
       setHeaderTitle('도움요청');
-    } else {
+    } else if (type === 'helper'){
       setHeaderTitle('같이하기');
+    } else {
+      setHeaderTitle('');
     }
-  }, [setHeaderTitle]);
+  }, [type]);
 
   const board = useMemo(() => {
     return data?.data;
