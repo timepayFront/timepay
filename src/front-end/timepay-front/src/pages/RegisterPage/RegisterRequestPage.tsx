@@ -633,7 +633,7 @@ const RegisterRequestPage = () => {
                 {isDisabled ? (
                   <Button css={cssPostBtnStyle2}>작성완료</Button>
                 ) : (
-                  <Button htmlType="submit" css={cssPostBtnStyle} onClick={() => console.log('야')}>
+                  <Button htmlType="submit" css={cssPostBtnStyle} onClick={() => navigate('/home')}>
                     작성완료
                   </Button>
 
