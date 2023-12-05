@@ -66,7 +66,7 @@ const RegisterRequestPage = () => {
   }, [setHeaderTitle]);
 
   const [title, setTitle] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
+  const [target_location, setTargetLocation] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [exchangeTimepay, setExchangeTimepay] = useState(0);
   const [form] = Form.useForm();
@@ -95,6 +95,8 @@ const RegisterRequestPage = () => {
     }
     return e?.fileList;
   };
+
+
 
   // 사진
   const [images, setImages] = useState<File[]>([]);
@@ -162,13 +164,13 @@ const RegisterRequestPage = () => {
   }, [navigate]);
 
   // 버튼 활성화 관련
-  const isDisabled = !title || !content || !location;
+  const isDisabled = !title || !content || !target_location;
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
   const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation(event.target.value);
+    setTargetLocation(event.target.value);
   };
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -211,6 +213,8 @@ const RegisterRequestPage = () => {
 
   const handleOnSubmit = useCallback(
     async (values: any) => {
+      
+      
       if (
         userInfo?.data.body.time_pay &&
         userInfo?.data.body.time_pay < exchangeTimepay
@@ -264,6 +268,7 @@ const RegisterRequestPage = () => {
             'YYYY-MM-DD',
           )}T${selectedEndTime.format('HH:mm:ss')}.000Z`,
           pay: exchangeTimepay,
+          location: target_location,
         };
 
         console.log(newPost);
@@ -544,7 +549,7 @@ const RegisterRequestPage = () => {
                       paddingLeft: '15px',
                       width: '230px',
                     }}
-                    value={location}
+                    value={target_location}
                     prefix={<FlagFilled style={{ marginRight: '5px' }} />}
                     onChange={(event) => {
                       handleLocationChange(event);
