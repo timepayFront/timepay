@@ -25,8 +25,20 @@ services:
       - /root/data/phpmyadmin/sessions:/docker/phpmyadmin/sessions
   backend:
     build: ./src/back-end/
+    environment:
+      KAKAO_ADMIN_KEY: c54d334336374b8c209e7e487ec693fd
+      KAKAO_CLIENT_ID: e1d781c0bf8fcc076c53ca37bc99f22c
+      #KAKAO_TOKEN_REDIRECT_URI: https://timepay.cs.kookmin.ac.kr/app/oauth/redirect/kakao
+      KAKAO_TOKEN_REDIRECT_URI: http://localhost/app/oauth/redirect/kakao
 
     #image: kmucs/timebank/timepay:2023.1
+  # front_dev:
+  #   build:
+  #     context: ./src/front-end/timepay-front/
+  #     dockerfile: dev.Dockerfile
+  #   command: sleep 100000
+  #   volumes:
+  # - ./src/front-end/timepay-front/src:/app/src
   web:
     build:
       context: ./src/front-end/
@@ -43,4 +55,5 @@ services:
     links:
       - phpmyadmin
       - backend
+      # - front_dev
     
