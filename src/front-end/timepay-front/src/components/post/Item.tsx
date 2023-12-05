@@ -80,13 +80,11 @@ const Item = ({ a, c, messageApi, onShowProfile }: any) => {
   return (
     <div css={cssComments}>
       <div css={cssEditDelete}>
-        {isCommentAuthor ? (
-          <Button className="edit">수정</Button>
-        ) : (
+        {!isCommentAuthor && (
           <Button className="edit" onClick={showReportModal}>
             신고
-          </Button>
-        )}
+          </Button>)}
+
         <Modal
           title="댓글 신고하기"
           open={isOpenReportModal}
@@ -123,7 +121,6 @@ const Item = ({ a, c, messageApi, onShowProfile }: any) => {
 
         {isCommentAuthor && (
           <>
-            <div className="sidebar">|</div>
             <Button
               className="delete"
               onClick={() => handleDeleteComment(c.id)}
