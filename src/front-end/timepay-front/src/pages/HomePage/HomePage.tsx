@@ -199,7 +199,7 @@ const HomePage = () => {
         {/* <div style={{position: 'fixed', width: '100vw', height: '79vh', display: 'flex', flexDirection: 'column'}}> */}
           <Button onClick={handleOnLinkRequest} css={cssBtnStyle1}><Link to={PATH.Register_HR}><span style={{font:'20px'}}>도움요청</span><br/>도움이 필요할 때<br/>다른 분에게 요청해보세요!</Link></Button>
           <Button onClick={handleOnLinkWith} css={cssBtnStyle1}><Link to={PATH.Register_HS}><span>같이하기</span><br/>마음이 맞는 사람끼리<br/>같이 활동해보세요!</Link></Button>
-          <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.Register_HR}><span>바로도움요청</span><br/>급하게 도움이 필요할 때<br/>도움을 요청해보세요!</Link></Button>
+          <Button onClick={handleOnShowQRModal} css={cssBtnStyle1}><Link to={PATH.HOME}><span>바로도움요청</span><br/>급하게 도움이 필요할 때<br/>도움을 요청해보세요!</Link></Button>
         {/* </div> */}
       </div>
       <div>
