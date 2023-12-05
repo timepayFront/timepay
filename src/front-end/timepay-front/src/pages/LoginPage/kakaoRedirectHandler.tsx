@@ -47,7 +47,7 @@ const KakaoRedirectHandler = () => {
 
       //const requestUrl = `http://13.125.119.30/oauth/redirect/kakao?code=${authorizationCode}`;
       //const requestUrl = `http://10.30.112.173:8080/oauth/redirect/kakao?code=${authorizationCode}`;
-      const requestUrl = `https://timepay.cs.kookmin.ac.kr/oauth/redirect/kakao?code=${authorizationCode}`;
+      const requestUrl = `http://localhost/oauth/redirect/kakao?code=${authorizationCode}`;
       console.log('인가코드 전송 url: ', requestUrl);
       console.log('entire: ', new URL(window.location.href));
 

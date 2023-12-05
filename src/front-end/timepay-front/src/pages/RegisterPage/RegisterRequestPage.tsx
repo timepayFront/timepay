@@ -257,12 +257,12 @@ const RegisterRequestPage = () => {
               : 0
             : 0,
           images: null,
-          startTime: `${moment(values.activityDate).format(
+          startTime: `${selectedDate.format(
             'YYYY-MM-DD',
-          )}T${moment(values.startTime).format('HH:mm:ss')}.000Z`,
+          )}T${selectedStartTime.format('HH:mm:ss')}.000Z`,
           endTime: `${moment(values.activityDate).format(
             'YYYY-MM-DD',
-          )}T${moment(values.endTime).format('HH:mm:ss')}.000Z`,
+          )}T${selectedEndTime.format('HH:mm:ss')}.000Z`,
           pay: exchangeTimepay,
         };
 
@@ -280,7 +280,7 @@ const RegisterRequestPage = () => {
               content: '게시글이 등록되었습니다.',
               duration: 1,
               onClose: () => {
-                navigate(-1);
+                navigate(-3);
               },
             });
           },

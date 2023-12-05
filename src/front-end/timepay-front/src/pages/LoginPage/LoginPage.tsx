@@ -31,7 +31,7 @@ const LoginPage = () => {
         <DoubleRightOutlined />
       </Button>
       <Space direction="vertical" size="middle" css={topWrapperCSS}>
-        <Text css={cssTopText}>모두에게 동일한 시간</Text>
+        <Text css={cssTopText}>최선우 바보</Text>
         <Text css={cssMiddleText}>시간을 거래하는 타임페이</Text>
         <img src={timepayLogo} className="logo" css={cssLogo} alt="타임페이" />
         <Text css={cssBottomText}>나의 시간을 가치있게 써보아요</Text>

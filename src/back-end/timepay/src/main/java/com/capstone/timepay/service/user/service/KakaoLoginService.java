@@ -18,12 +18,16 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class KakaoLoginService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserProfileRepository userProfileRepository;
@@ -44,20 +48,19 @@ public class KakaoLoginService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=e1d781c0bf8fcc076c53ca37bc99f22c");
+            sb.append("&client_id=" + System.getenv("KAKAO_CLIENT_ID"));
             //sb.append("&client_id=79587b639a3a9ca1c9433fa63bc55863");
             //sb.append("&redirect_uri=http://localhost:8080/oauth/redirect/kakao"); // 서버 로컬 테스트용
             //sb.append("&redirect_uri=http://localhost:3000/oauth/redirect/kakao"); // 프론트 로컬 테스트용
             //sb.append("&redirect_uri=http://13.125.249.51/oauth/redirect/kakao"); // 배포할 때 이 코드 사용
-            sb.append("&redirect_uri=https://timepay.cs.kookmin.ac.kr/app/oauth/redirect/kakao"); // 배포할 때 이 코드 사용
-
-
+            sb.append("&redirect_uri=");
+            sb.append(System.getenv("KAKAO_TOKEN_REDIRECT_URI")); // 배포할 때 이 코드 사용
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            // System.out.println("responseCode : " + responseCode);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -78,7 +81,11 @@ public class KakaoLoginService {
             br.close();
             bw.close();
         }catch (IOException e) {
-            e.printStackTrace();
+            if(logger.isErrorEnabled()) {
+                logger.error("FAILED WHEN GET ACCESS TOKEN = ", e);
+            }
+            // e.printStackTrace();
+            throw new IllegalArgumentException("code is not valid");
         }
 
         return access_Token;
@@ -90,7 +97,11 @@ public class KakaoLoginService {
         String email = null;
         String sex = null;
         User kakaoUser = null;
-        String Key = "A4D47DASDA287964EQ14871ZS44875A";
+        String Key = System.getenv("KAKAO_CLIENT_ID");
+
+        if(token == null || token == "") {
+            throw new IllegalArgumentException("access token must be has values.");
+        }
 
         //access_token을 이용하여 사용자 정보 조회
 
@@ -193,7 +204,11 @@ public class KakaoLoginService {
             //}
 
         } catch (IOException e) {
-            e.printStackTrace();
+            if(logger.isErrorEnabled()) {
+                logger.error("faield when request user info by access token : ", e);
+            }
+            // e.printStackTrace();
+            throw new IllegalArgumentException("access token is not valid");
         }
 
         return kakaoUser;

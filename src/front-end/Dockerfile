@@ -1,7 +1,6 @@
 FROM node:16 as build-user
 WORKDIR /app/user
 COPY timepay-front/package.json timepay-front/yarn.lock ./
-RUN sed -i "s#s://registry.npmjs.org#://nexus.vm.cs.kookmin.ac.kr/registry/repository/npm#g" yarn.lock
 RUN yarn install
 COPY timepay-front/ .
 RUN yarn build
@@ -9,7 +8,6 @@ RUN yarn build
 FROM node:16 as build-admin
 WORKDIR /app/admin
 COPY timepay-admin/package.json timepay-admin/yarn.lock ./
-RUN sed -i "s#s://registry.npmjs.org#://nexus.vm.cs.kookmin.ac.kr/registry/repository/npm#g" yarn.lock
 RUN yarn install
 COPY timepay-admin/ .
 RUN yarn build
