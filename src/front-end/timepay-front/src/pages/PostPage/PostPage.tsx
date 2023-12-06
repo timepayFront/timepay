@@ -208,6 +208,10 @@ const PostPage = () => {
 
   // 댓글 등록
   const handleSubmitComment = useCallback(async () => {
+    if (!commentValue.content.trim()) {
+      // 댓글이 비어 있다면 등록 프로세스를 실행하지 않음
+      return;
+    }
     await createCommentMutation.mutateAsync(commentValue, {
       onSuccess: (data) => {
         messageApi.success({
