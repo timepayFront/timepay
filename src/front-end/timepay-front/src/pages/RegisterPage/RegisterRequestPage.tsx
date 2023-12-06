@@ -83,10 +83,6 @@ const RegisterRequestPage = () => {
 
   const pay = 100;
 
-  useEffect(() => {
-    console.log(selectedCategory);
-  }, [selectedCategory]);
-
   const { data, isLoading } = useGetCategory({
     type: '도움요청',
     useYn: 'Y',
@@ -291,7 +287,7 @@ const RegisterRequestPage = () => {
               content: '게시글이 등록되었습니다.',
               duration: 1,
               onClose: () => {
-                navigate(-3);
+                navigate('/search');
               },
             });
           },
@@ -641,7 +637,7 @@ const RegisterRequestPage = () => {
                 {isDisabled ? (
                   <Button css={cssPostBtnStyle2}>작성완료</Button>
                 ) : (
-                  <Button htmlType="submit" css={cssPostBtnStyle} onClick={() => navigate('/home')}>
+                  <Button htmlType="submit" css={cssPostBtnStyle} onClick={() => handleOnSubmit}>
                     작성완료
                   </Button>
 
