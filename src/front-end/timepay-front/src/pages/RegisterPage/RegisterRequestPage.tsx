@@ -76,11 +76,16 @@ const RegisterRequestPage = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedStartTime, setSelectedStartTime] = useState(dayjs().hour(0).minute(0));
   const [selectedEndTime, setSelectedEndTime] = useState(dayjs().hour(0).minute(30));
-
+  const [selectedCategory, setSelectedCategory] = useState();
+  
   const createDealBoardsMutation = useCreateDealBoards();
   const [messageApi, contextHolder] = message.useMessage();
 
   const pay = 100;
+
+  useEffect(() => {
+    console.log(selectedCategory);
+  }, [selectedCategory]);
 
   const { data, isLoading } = useGetCategory({
     type: '도움요청',
@@ -268,7 +273,8 @@ const RegisterRequestPage = () => {
             'YYYY-MM-DD',
           )}T${selectedEndTime.format('HH:mm:ss')}.000Z`,
           pay: exchangeTimepay,
-          location: target_location,
+          location: target_location,     
+          category: selectedCategory,
         };
 
         console.log(newPost);
@@ -321,6 +327,7 @@ const RegisterRequestPage = () => {
   const [current, setCurrent] = useState(0);
 
   const handleCategoryChange = (value: any) => {
+    setSelectedCategory(value);
     setCurrent(1);
   };
 
@@ -404,10 +411,11 @@ const RegisterRequestPage = () => {
                 )}
                 <Form.Item
                   label="카테고리 선택"
-                  name="category"
                   css={isAgency ? cssPostDateStyle : cssPostCategoryStyle}
                 >
-                  <Radio.Group onChange={handleCategoryChange}>
+                  <Radio.Group onChange={(e) => 
+                    setSelectedCategory(e.target.value)} 
+                    value={selectedCategory}>
                     {data?.data.map((category) => (
                       <Radio.Button
                         key={category.categoryId}
