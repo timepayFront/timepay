@@ -202,13 +202,17 @@ const RegisterRequestPage = () => {
   };
 
   const handleOnChangeTime = useCallback((changedValues: any, values: any) => {
-    console.log(values) ;
+    console.log('changedValues', changedValues) ;
+    console.log('values', values) ;
     console.log(values.startTime) ;
     console.log(values.endTime) ;
-    if (values.startTime && values.endTime) {
-      const startTime = values.startTime.clone();
-      const endTime = values.endTime.clone();
+    console.log(selectedStartTime) ;
+    console.log(selectedEndTime) ;
+    if (changedValues.startTime && changedValues.endTime) {
+      const startTime = changedValues.startTime ;
+      const endTime = changedValues.endTime ;
       const duration = endTime.diff(startTime, 'minutes');
+      console.log(duration) ;
       setExchangeTimepay(duration);
     } else {
       setExchangeTimepay(30);
@@ -464,6 +468,7 @@ const RegisterRequestPage = () => {
                 </Form.Item>
 
                 <div className="time">
+                  
                   <Form.Item
                     label="활동을 시작할 시간"
                     css={cssPostDateStyle}
@@ -480,7 +485,8 @@ const RegisterRequestPage = () => {
                         if (value !== null) {
                           console.log('Selected Start Time:', value);
                           setSelectedStartTime(value);
-                          handleOnChangeTime({ startTime: value }, form.getFieldsValue());
+                          console.log('selectedStartTime: ', selectedStartTime) ;
+                          handleOnChangeTime({ startTime: value, endTime:selectedEndTime }, value);
                         }
                       }}
                     />
@@ -503,7 +509,8 @@ const RegisterRequestPage = () => {
                         if (value !== null) {
                           console.log('Selected End Time:', value);
                           setSelectedEndTime(value);
-                          handleOnChangeTime({ endTime: value }, form.getFieldsValue());
+                          console.log('selectedEndTime:', selectedEndTime);
+                          handleOnChangeTime({ startTime: selectedStartTime, endTime: value }, value);
                         }
                       }}
                       disabledTime={(now) => {
