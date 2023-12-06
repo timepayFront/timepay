@@ -202,6 +202,9 @@ const RegisterRequestPage = () => {
   };
 
   const handleOnChangeTime = useCallback((changedValues: any, values: any) => {
+    console.log(values) ;
+    console.log(values.startTime) ;
+    console.log(values.endTime) ;
     if (values.startTime && values.endTime) {
       const startTime = values.startTime.clone();
       const endTime = values.endTime.clone();
@@ -498,6 +501,7 @@ const RegisterRequestPage = () => {
                       popupClassName="time-picker-no-footer"
                       onSelect={(value) => {
                         if (value !== null) {
+                          console.log('Selected End Time:', value);
                           setSelectedEndTime(value);
                           handleOnChangeTime({ endTime: value }, selectedEndTime);
                         }
